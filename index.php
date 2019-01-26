@@ -69,15 +69,15 @@
     // Named Params
 
     // $sql = 'SELECT * FROM posts where author = :author';
-    $sql = 'SELECT * FROM posts where author = :author && is_published = :is_published' ;
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['author' => $author, 'is_published' => $is_published]);
-    $posts = $stmt->fetchAll();
+    // $sql = 'SELECT * FROM posts where author = :author && is_published = :is_published' ;
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute(['author' => $author, 'is_published' => $is_published]);
+    // $posts = $stmt->fetchAll();
 
-    var_dump($posts);
-    foreach ($posts as $post) {
-        echo $post->title . "\n";
-    }
+    // var_dump($posts);
+    // foreach ($posts as $post) {
+    //     echo $post->title . "\n";
+    // }
 
 
 
