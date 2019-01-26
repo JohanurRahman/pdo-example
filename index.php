@@ -91,12 +91,49 @@
 
     # GET ROW COUNT
 
-    $sql = 'SELECT * FROM posts where author = ?';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$author]);
-    $postCount = $stmt->rowCount();
+    // $sql = 'SELECT * FROM posts where author = ?';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute([$author]);
+    // $postCount = $stmt->rowCount();
 
-    echo $postCount;
+    // echo $postCount;
+
+    # INSERT DATA
+
+    $title = 'Post Six';
+    $body = 'This is post Six';
+    $author = 'Ross';
+    $is_published = false;
+    
+
+    $sql = 'INSERT INTO posts(title,body,author,is_published) VALUES (:title, :body, :author, :is_published)';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['title' => $title, 'body' => $body, 'author' => $author, 'is_published' => $is_published]);
+    echo 'Post Added';
+
+    
+    # UPDATE DATA
+
+    $id = 5;
+    $body = 'This is the updated post';
+    $author = 'Arafat';
+    $is_published = false;
+    
+
+    $sql = 'UPDATE posts SET body = :body, author = :author, is_published = :is_published WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['body' => $body, 'author' => $author, 'is_published' => $is_published, 'id' => $id]);
+    echo 'Post Updated';
+
+    
+    # DELETE DATA
+
+    $id = 6;
+
+    $sql = 'DELETE FROM posts WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    echo 'Post Deleted';
 
 
 
