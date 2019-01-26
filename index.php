@@ -39,4 +39,31 @@
     //     echo $row->title . "\n";
     // }
 
+
+    #### Prepared Statements (prepare & execute)
+
+    # Unsafe way
+    // $sql = "SELECT * FROM posts where author = '$author'";
+
+    # Safe way
+
+    # Fetch Multiple Posts
+
+    // User Input
+    $author = 'Steve';
+    $is_published = true;
+
+    // Positional Params
+
+    $sql = 'SELECT * FROM posts where author = ? && is_published = ?';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$author, $is_published]);
+    $posts = $stmt->fetchAll();
+
+    var_dump($posts);
+    foreach ($posts as $post) {
+        echo $post->title . "\n";
+    }
+
+
 ?>
