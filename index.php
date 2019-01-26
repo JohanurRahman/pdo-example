@@ -15,7 +15,7 @@
     # Create a PDO instance
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
     
     #### PDO Query
@@ -50,20 +50,24 @@
     # Fetch Multiple Posts
 
     // User Input
-    // $author = 'Steve';
-    // $is_published = true;
+    $author = 'Steve';
+    $is_published = true;
+    $id = 1;
+    $limit = 3;
 
     // Positional Params
 
     // $sql = 'SELECT * FROM posts where author = ? && is_published = ?';
-    // $stmt = $pdo->prepare($sql);
+    $sql = 'SELECT * FROM posts where author = ? && is_published = ? LIMIT ?';
+    $stmt = $pdo->prepare($sql);
     // $stmt->execute([$author, $is_published]);
-    // $posts = $stmt->fetchAll();
+    $stmt->execute([$author, $is_published, $limit]);
+    $posts = $stmt->fetchAll();
 
     // var_dump($posts);
-    // foreach ($posts as $post) {
-    //     echo $post->title . "\n";
-    // }
+    foreach ($posts as $post) {
+        echo $post->title . "\n";
+    }
 
 
     // Named Params
@@ -100,54 +104,54 @@
 
     # INSERT DATA
 
-    $title = 'Post Six';
-    $body = 'This is post Six';
-    $author = 'Ross';
-    $is_published = false;
+    // $title = 'Post Six';
+    // $body = 'This is post Six';
+    // $author = 'Ross';
+    // $is_published = false;
     
 
-    $sql = 'INSERT INTO posts(title,body,author,is_published) VALUES (:title, :body, :author, :is_published)';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['title' => $title, 'body' => $body, 'author' => $author, 'is_published' => $is_published]);
-    echo 'Post Added';
+    // $sql = 'INSERT INTO posts(title,body,author,is_published) VALUES (:title, :body, :author, :is_published)';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute(['title' => $title, 'body' => $body, 'author' => $author, 'is_published' => $is_published]);
+    // echo 'Post Added';
 
     
     # UPDATE DATA
 
-    $id = 5;
-    $body = 'This is the updated post';
-    $author = 'Arafat';
-    $is_published = false;
+    // $id = 5;
+    // $body = 'This is the updated post';
+    // $author = 'Arafat';
+    // $is_published = false;
     
 
-    $sql = 'UPDATE posts SET body = :body, author = :author, is_published = :is_published WHERE id = :id';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['body' => $body, 'author' => $author, 'is_published' => $is_published, 'id' => $id]);
-    echo 'Post Updated';
+    // $sql = 'UPDATE posts SET body = :body, author = :author, is_published = :is_published WHERE id = :id';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute(['body' => $body, 'author' => $author, 'is_published' => $is_published, 'id' => $id]);
+    // echo 'Post Updated';
 
     
     # DELETE DATA
 
-    $id = 6;
+    // $id = 6;
 
-    $sql = 'DELETE FROM posts WHERE id = :id';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $id]);
-    echo 'Post Deleted';
+    // $sql = 'DELETE FROM posts WHERE id = :id';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute(['id' => $id]);
+    // echo 'Post Deleted';
 
 
     
     # SEARCH DATA
 
-    $search ="%post%";
-    $sql = 'SELECT * FROM posts WHERE title LIKE ?';
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$search]);
-    $posts = $stmt->fetchAll();
+    // $search ="%post%";
+    // $sql = 'SELECT * FROM posts WHERE title LIKE ?';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute([$search]);
+    // $posts = $stmt->fetchAll();
 
-    foreach ($posts as $post) {
-        echo $post->title . "\n";
-    }
+    // foreach ($posts as $post) {
+    //     echo $post->title . "\n";
+    // }
 
 
 
