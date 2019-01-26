@@ -50,20 +50,35 @@
     # Fetch Multiple Posts
 
     // User Input
-    $author = 'Steve';
-    $is_published = true;
+    // $author = 'Steve';
+    // $is_published = true;
 
     // Positional Params
 
-    $sql = 'SELECT * FROM posts where author = ? && is_published = ?';
+    // $sql = 'SELECT * FROM posts where author = ? && is_published = ?';
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute([$author, $is_published]);
+    // $posts = $stmt->fetchAll();
+
+    // var_dump($posts);
+    // foreach ($posts as $post) {
+    //     echo $post->title . "\n";
+    // }
+
+
+    // Named Params
+
+    // $sql = 'SELECT * FROM posts where author = :author';
+    $sql = 'SELECT * FROM posts where author = :author && is_published = :is_published' ;
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$author, $is_published]);
+    $stmt->execute(['author' => $author, 'is_published' => $is_published]);
     $posts = $stmt->fetchAll();
 
     var_dump($posts);
     foreach ($posts as $post) {
         echo $post->title . "\n";
     }
+
 
 
 ?>
